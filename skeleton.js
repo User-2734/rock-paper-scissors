@@ -1,15 +1,25 @@
 console.log("Linking Test!")
 
 function getComputerChoice (a, b, c) {
-    let z = Math.random()*3
+    let rand = Math.random()*2
+    let rand2 = Math.round(rand)
 
-    if (z == 0) {
+    if (rand2 == 0) {
         return a;
-    } else if (z == 1) {
+    } else if (rand2 == 1) {
         return b;
-    } else if (z == 2) {
+    } else if (rand2 == 2) {
         return c;
     }
 }
 
-console.log()
+var a = "rock"
+var b = "paper"
+var c = "scissors"
+
+function getHumanChoice () {
+    
+}
+
+console.log(getComputerChoice(a, b, c))
+
