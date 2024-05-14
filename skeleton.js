@@ -1,5 +1,6 @@
 console.log("Linking Test!")
 
+//Computer choice generated via random numbers
 function getComputerChoice (a, b, c) {
     let rand = Math.random()*2
     let rand2 = Math.round(rand)
@@ -13,13 +14,37 @@ function getComputerChoice (a, b, c) {
     }
 }
 
+//Outputs for getComputerChoice to return
 var a = "rock"
 var b = "paper"
 var c = "scissors"
 
+//Function for user choice
 function getHumanChoice () {
+    let q = prompt("Let's Play!")
+
+    if (q == "r") {
+        return "You chose rock!"
+    } else if (q == "p") {
+        return "You chose paper!"
+    } else if (q == "s") {
+        return "You chose scissors!"
+    }
+}
+
+humanScore = 0
+computerScore = 0
+
+function playRound(humanChoice, computerChoice) {
+    if ((humanChoice == "r" && computerChoice == 0) || (humanChoice == "p" && computerChoice == 1) || (humanChoice == "s" && computerChoice == 2)) {
+        return "You both tied!"
+    }
+
     
 }
 
-console.log(getComputerChoice(a, b, c))
+const humanSelection = getHumanChoice()
+const computerSelection = getComputerChoice(a, b, c)
+
+playRound(humanSelection, computerSelection)
 
