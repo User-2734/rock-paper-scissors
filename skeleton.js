@@ -32,15 +32,23 @@ function getHumanChoice () {
     }
 }
 
-humanScore = 0
-computerScore = 0
+var humanScore = 0
+var computerScore = 0
 
 function playRound(humanChoice, computerChoice) {
     if ((humanChoice == "r" && computerChoice == 0) || (humanChoice == "p" && computerChoice == 1) || (humanChoice == "s" && computerChoice == 2)) {
         return "You both tied!"
     }
 
-    
+    if ((humanChoice == "r" && computerChoice == 2) || (humanChoice == "p" && computerChoice == 0) || (humanChoice == "s" && computerChoice == 1)) {
+        return "You won!"
+        humanScore++
+    }
+
+    if ((humanChoice == "r" && computerChoice == 1) || (humanChoice == "p" && computerChoice == 2) || (humanChoice == "s" && computerChoice == 0)) {
+        return "The computer won!"
+        computerScore++
+    }
 }
 
 const humanSelection = getHumanChoice()
