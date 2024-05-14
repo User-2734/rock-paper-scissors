@@ -1,5 +1,4 @@
-console.log("Linking Test!")
-
+//Global variables; first set is for rand num choice to translate to options, other set to keep track of user score
 var compChoice = ""
 var userChoice = ""
 let compScore = 0
@@ -11,6 +10,7 @@ var a = "rock"
 var b = "paper"
 var c = "scissors"
 
+//For-loop to ensure that game has an end
 for (let i = 0; i < 4; i++) {
 
 //Function for user choice
@@ -46,7 +46,7 @@ function getComputerChoice (a, b, c) {
     }
 }
 
-
+//Decides who won/lost and increments score based of that info
 function playRound () {
     if ((userChoice == "rock" && compChoice == "rock") || (userChoice == "paper" && compChoice == "paper") || (userChoice == "scissors" && compChoice == "scissors")) {
         return "you tied"
@@ -63,6 +63,7 @@ function playRound () {
     }
 }
 
+//Displays all this info for the user's need
 console.log(getHumanChoice())
 console.log(getComputerChoice(a, b, c))
 console.log(playRound())
@@ -70,7 +71,7 @@ console.log("comp score: " + compScore)
 console.log("user score: " + userScore)
 }
 
-
+//Confirms who won the game in the console
 if (userScore > compScore) {
     console.log("Congrats! You won the game")
 } else if (userScore < compScore) {
