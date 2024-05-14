@@ -1,16 +1,22 @@
 console.log("Linking Test!")
 
+var compChoice = ""
+var userChoice = ""
+
 //Computer choice generated via random numbers
 function getComputerChoice (a, b, c) {
     let rand = Math.random()*2
     let rand2 = Math.round(rand)
 
     if (rand2 == 0) {
-        return a;
+        compChoice = "rock"
+        return "Computer chose: " + a;
     } else if (rand2 == 1) {
-        return b;
+        compChoice = "paper"
+        return "Computer chose: " + b;
     } else if (rand2 == 2) {
-        return c;
+        compChoice = "scissors"
+        return "Computer chose: " + c;
     }
 }
 
@@ -24,35 +30,32 @@ function getHumanChoice () {
     let q = prompt("Let's Play!")
 
     if (q == "r") {
+        userChoice = "rock"
         return "You chose rock!"
     } else if (q == "p") {
+        userChoice = "paper"
         return "You chose paper!"
     } else if (q == "s") {
+        userChoice = "scissors"
         return "You chose scissors!"
     }
 }
 
-var humanScore = 0
-var computerScore = 0
-
-function playRound(humanChoice, computerChoice) {
-    if ((humanChoice == "r" && computerChoice == 0) || (humanChoice == "p" && computerChoice == 1) || (humanChoice == "s" && computerChoice == 2)) {
-        return "You both tied!"
+function testr () {
+    if ((userChoice == "rock" && compChoice == "rock") || (userChoice == "paper" && compChoice == "paper") || (userChoice == "scissors" && compChoice == "scissors")) {
+        return "you tied"
     }
 
-    if ((humanChoice == "r" && computerChoice == 2) || (humanChoice == "p" && computerChoice == 0) || (humanChoice == "s" && computerChoice == 1)) {
-        return "You won!"
-        humanScore++
+    if ((userChoice == "rock" && compChoice == "scissors") || (userChoice == "paper" && compChoice == "rock") || (userChoice == "scissors" && compChoice == "paper")) {
+        return "you won"
     }
 
-    if ((humanChoice == "r" && computerChoice == 1) || (humanChoice == "p" && computerChoice == 2) || (humanChoice == "s" && computerChoice == 0)) {
-        return "The computer won!"
-        computerScore++
+    if ((userChoice == "rock" && compChoice == "paper") || (userChoice == "paper" && compChoice == "scissors") || (userChoice == "scissors" && compChoice == "rock")) {
+        return "comp won"
     }
 }
 
-const humanSelection = getHumanChoice()
-const computerSelection = getComputerChoice(a, b, c)
-
-playRound(humanSelection, computerSelection)
+console.log(getComputerChoice(a, b, c))
+console.log(getHumanChoice())
+console.log(testr())
 
