@@ -1,78 +1,102 @@
 //Global variables; first set is for rand num choice to translate to options, other set to keep track of user score
-var compChoice = ""
-var userChoice = ""
-let compScore = 0
-let userScore = 0
+let computerScore = 0
+let playerScore = 0
 
-
-//Outputs for getComputerChoice to return
-var a = "rock"
-var b = "paper"
-var c = "scissors"
-
-//Function for user choice
-function getHumanChoice() {
-    let q = prompt("Let's Play!")
-
-    if (q == "r") {
-        userChoice = "rock"
-        return "You chose rock!"
-    } else if (q == "p") {
-        userChoice = "paper"
-        return "You chose paper!"
-    } else if (q == "s") {
-        userChoice = "scissors"
-        return "You chose scissors!"
+// function to convert a user input to either rock, paper, or scissors.
+function parsePlayerChoice(choice) {
+    if (choice == "r" || choice == "rock") {
+        return "rock";
+    } else if (choice == "p" || choice == "paper") {
+        return "paper";
+    } else if (choice == "s" || choice == "scissors") {
+        return "scissors";
+    } else {
+        throw new Error(`User made invalid choice "${choice}"`);
     }
 }
 
+//Function for user choice
+function getPlayerChoice() {
+    let playerChoice = prompt("Let's Play! Type rock, paper, or scissors.");
+    return parsePlayerChoice(playerChoice);
+}
+
 //Computer choice generated via random numbers
-function getComputerChoice(a, b, c) {
+function getComputerChoice() {
     let rand = Math.random() * 2
     let rand2 = Math.round(rand)
 
     if (rand2 == 0) {
-        compChoice = "rock"
-        return "Computer chose: " + a;
+        return "rock";
     } else if (rand2 == 1) {
-        compChoice = "paper"
-        return "Computer chose: " + b;
+        return "paper";
     } else if (rand2 == 2) {
-        compChoice = "scissors"
-        return "Computer chose: " + c;
+        return "scissors";
+    } else {
+        throw new Error("Computer failed to make a choice");
     }
 }
 
-//Decides who won/lost and increments score based of that info
+// converts a choice to an integer in the range [0, 2]
+function choiceToNum(choice) {
+    let num = ["scissors", "paper", "rock"].indexOf(choice);
+    // catch an invalid choice
+    if (num == -1) {
+        throw new Error(`Invalid choice: "${choice}"`)
+    }
+    return num;
+}
+
+// Decides who won/lost
+function scoreRound(playerChoice, computerChoice) {
+    if ((playerChoice == "rock" && computerChoice == "rock") || (playerChoice == "paper" && computerChoice == "paper") || (playerChoice == "scissors" && computerChoice == "scissors")) {
+        return "tie";
+    }
+
+    if ((playerChoice == "rock" && computerChoice == "scissors") || (playerChoice == "paper" && computerChoice == "rock") || (playerChoice == "scissors" && computerChoice == "paper")) {
+        return "player";
+    }
+
+    if ((playerChoice == "rock" && computerChoice == "paper") || (playerChoice == "paper" && computerChoice == "scissors") || (playerChoice == "scissors" && computerChoice == "rock")) {
+        return "computer";
+    }
+}
+
+// increments score based of who won
+function incrementScore(winner) {
+    if (winner == "tie") {
+        // do nothing
+    } else if (winner == "player") {
+        playerScore += 1;
+    } else if (winner == "computer") {
+        computerScore += 1;
+    }
+}
+
+// plays a round
 function playRound() {
-    if ((userChoice == "rock" && compChoice == "rock") || (userChoice == "paper" && compChoice == "paper") || (userChoice == "scissors" && compChoice == "scissors")) {
-        return "you tied"
+    let playerChoice = getPlayerChoice();
+    alert(`You chose ${playerChoice}`);
+    let computerChoice = getComputerChoice();
+    alert(`Computer chose ${computerChoice}`);
+    let winner = scoreRound(playerChoice, computerChoice);
+    if (winner == "tie") {
+        alert("You tied!");
+    } else {
+        alert(`${winner} won!`)
     }
-
-    if ((userChoice == "rock" && compChoice == "scissors") || (userChoice == "paper" && compChoice == "rock") || (userChoice == "scissors" && compChoice == "paper")) {
-        userScore++
-        return "you won"
-    }
-
-    if ((userChoice == "rock" && compChoice == "paper") || (userChoice == "paper" && compChoice == "scissors") || (userChoice == "scissors" && compChoice == "rock")) {
-        compScore++
-        return "comp won"
-    }
+    incrementScore(winner);
 }
 
 //For-loop to ensure that game has an end
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 3; i++) {
     //Displays all this info for the user's need
-    console.log(getHumanChoice())
-    console.log(getComputerChoice(a, b, c))
-    console.log(playRound())
-    console.log("comp score: " + compScore)
-    console.log("user score: " + userScore)
+    playRound()
 }
 
 //Confirms who won the game in the console
-if (userScore > compScore) {
-    console.log("Congrats! You won the game")
-} else if (userScore < compScore) {
-    console.log("Computer won the game!")
-}
+if (playerScore > computerScore) {
+    alert("Congrats! You won the game");
+} else {
+    alert("Computer won the game!");
+} 
