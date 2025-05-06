@@ -47,19 +47,29 @@ function choiceToNum(choice) {
     return num;
 }
 
+function wrap(n) {
+    if (n < 0) {
+        n += 3;
+    } else if (n > 2) {
+        n %= 3;
+    }
+    return n;
+}
+
+function numToResult(num) {
+    if (num < 0 || num > 2) {
+        throw new Error(`Invalid num for result ${num}`)
+    }
+    return ["tie", "computer", "player"][num];
+}
+
 // Decides who won/lost
 function scoreRound(playerChoice, computerChoice) {
-    if ((playerChoice == "rock" && computerChoice == "rock") || (playerChoice == "paper" && computerChoice == "paper") || (playerChoice == "scissors" && computerChoice == "scissors")) {
-        return "tie";
-    }
+    playerChoice = choiceToNum(playerChoice);
+    computerChoice = choiceToNum(computerChoice);
 
-    if ((playerChoice == "rock" && computerChoice == "scissors") || (playerChoice == "paper" && computerChoice == "rock") || (playerChoice == "scissors" && computerChoice == "paper")) {
-        return "player";
-    }
-
-    if ((playerChoice == "rock" && computerChoice == "paper") || (playerChoice == "paper" && computerChoice == "scissors") || (playerChoice == "scissors" && computerChoice == "rock")) {
-        return "computer";
-    }
+    let result = wrap(playerChoice - computerChoice);
+    return numToResult(result);
 }
 
 // increments score based of who won
