@@ -10,11 +10,8 @@ var a = "rock"
 var b = "paper"
 var c = "scissors"
 
-//For-loop to ensure that game has an end
-for (let i = 0; i < 4; i++) {
-
 //Function for user choice
-function getHumanChoice () {
+function getHumanChoice() {
     let q = prompt("Let's Play!")
 
     if (q == "r") {
@@ -30,8 +27,8 @@ function getHumanChoice () {
 }
 
 //Computer choice generated via random numbers
-function getComputerChoice (a, b, c) {
-    let rand = Math.random()*2
+function getComputerChoice(a, b, c) {
+    let rand = Math.random() * 2
     let rand2 = Math.round(rand)
 
     if (rand2 == 0) {
@@ -47,7 +44,7 @@ function getComputerChoice (a, b, c) {
 }
 
 //Decides who won/lost and increments score based of that info
-function playRound () {
+function playRound() {
     if ((userChoice == "rock" && compChoice == "rock") || (userChoice == "paper" && compChoice == "paper") || (userChoice == "scissors" && compChoice == "scissors")) {
         return "you tied"
     }
@@ -63,12 +60,14 @@ function playRound () {
     }
 }
 
-//Displays all this info for the user's need
-console.log(getHumanChoice())
-console.log(getComputerChoice(a, b, c))
-console.log(playRound())
-console.log("comp score: " + compScore)
-console.log("user score: " + userScore)
+//For-loop to ensure that game has an end
+for (let i = 0; i < 4; i++) {
+    //Displays all this info for the user's need
+    console.log(getHumanChoice())
+    console.log(getComputerChoice(a, b, c))
+    console.log(playRound())
+    console.log("comp score: " + compScore)
+    console.log("user score: " + userScore)
 }
 
 //Confirms who won the game in the console
